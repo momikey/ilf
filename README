@@ -1,1 +1,63 @@
+Interlinear Formatter v0.2
 
+The Interlinear Formatter (ILF) is a Python script that takes a text
+file containing an interlinear translation and formats it with HTML or
+MediaWiki formatted table markup. The rows of the table that is produced
+correspond to the lines of the interlinear--text, morphemic breakdown,
+glosses, etc. Each type of row is its own class, allowing full styling
+of the table using CSS.
+
+ILF was created by Michael Potter, and is open source under the MIT
+license. See the file LICENSE for more details.
+
+--------------------------------------------------
+Installing and Running ILF
+--------------------------------------------------
+
+ILF is a standalone script file that needs no installation. Just
+download and unzip, and you're ready to go.
+
+To run ILF, use the normal method of starting a Python script on your
+system. Windows users will need to run "python ilf.py", while users of
+other operating systems can use "./ilf.py" if the script is marked as
+executable. The ILF script has a few options, mainly to specify files
+for input and output. They are as follows:
+
+	*	-i or --input IFILE		read input from IFILE (default: input.txt)
+	*	-o or --output OFILE	write output to OFILE (default: output.html)
+	*	-w		if present, write MediaWiki markup instead of HTML
+	*	--version		print version information
+	*	-h		print a help message showing the available options
+
+ILF expects an interlinear file to be formatted in a specific way. Each
+line should begin with a "tag", a backslash followed by a single letter.
+These tags are passed on to the output as CSS classes. Most of them are
+the same as the defaults used by the SIL Toolbox program, but I have
+added a tag ("\i") to allow for separate styling of IPA representation.
+The full tag list is below.
+
+	\t	Text in the source language (freeform)
+	\i	Phonetic transcription
+	\m	Morphemic breakdown
+	\g	Glosses
+	\p	Parts of speech
+	\f	Translation into English or another target language (freeform)
+
+Each line of the interlinear file should begin with one of these tags.
+Lines without a tag are currently ignored. Lines that are "freeform" are
+converted to a single column which spans the entire width of the table.
+All other lines are converted to one column per word, gloss, or
+morpheme, based on whitespace.
+
+The output file will be a fragment of HTML (or MediaWiki markup, if the
+"-w" option was given) that contains a number of tables, one for each
+"section" of the interlinear; sections are ended by blank lines. The
+table rows belong to classes named "il_X", where X is the letter of the
+tag. So glosses are in class "il_g", parts of speech in "il_p", etc.
+These can be used for CSS styling of the text, and a sample CSS file is
+included.
+
+The script doesn't (yet) attempt to rearrange lines, and the output is
+not a full HTML document. As of the current version, it is only the bare
+minimum of a table, that must be added to an existing page. Future
+versions will change this behavior.
