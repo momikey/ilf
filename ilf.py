@@ -10,6 +10,29 @@ PROG_NAME = "ILF"
 PROG_INFO = "An Interlinear Formatting Script"
 VERSION = "0.2"
 
+TEMPLATE_HTML_BEGIN = \
+"""
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title></title>
+<meta name="generator" content="ILF Interlinear Formatter">
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<link href="./ilf.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+"""
+
+TEMPLATE_HTML_END = \
+"""
+
+</body>
+</html>
+"""
+
 # tags (copied from SIL toolbox, except \i)
 # \t Text to be translated (freeform)
 # \i Phonetic rendering of the text (IPA, CXS, etc.)
@@ -97,6 +120,9 @@ if __name__ == '__main__':
 	inputFile = open(options.ifile, 'r')
 	outputFile = open(options.ofile, 'w')
 	
+	if not options.usewiki:
+		outputFile.write(TEMPLATE_HTML_BEGIN)
+
 	colspan = 0
 	started = False
 	fileLines = inputFile.readlines()
@@ -132,5 +158,8 @@ if __name__ == '__main__':
 			else:
 				continue
 	
+	if not options.usewiki:
+		outputFile.write(TEMPLATE_HTML_END)
+
 	outputFile.close()
 	inputFile.close()

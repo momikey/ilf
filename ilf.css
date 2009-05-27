@@ -1,18 +1,18 @@
 /* freeform text */
-tr:il_t, tr:il_f
+tr.il_t, tr.il_f
 {	font-weight: bold;
-	font-size: 128%;	}
+	font-size: 116%;	}
 
 /* phonetic transcription */
-tr:il_i
-{	font-size: 91%;	}
+tr.il_i
+{	font-size: 93%;	}
 
-tr:il_m
+tr.il_m
 {	font-weight: bold;	}
 
-tr:il_g
+tr.il_g
 {	font-family: monospace;	}
 
-tr:il_p
+tr.il_p
 {	font-style: italic;
 	font-size: 91%;	}
