@@ -98,16 +98,16 @@ if __name__ == '__main__':
 	outputFile = open(options.ofile, 'w')
 	
 	colspan = 0
-	isEnded = True
+	started = False
 	fileLines = inputFile.readlines()
 	for line in fileLines:
 		# split the line, and see if we have a tag
 		splitLine = line.split()
 		if not splitLine:
-			# a blank line means the end of a table
-			endTable(outputFile, options.usewiki)
-			isEnded = True
-			colspan = 0
+			if started:		# don't print table endings before the text
+				# a blank line means the end of a table
+				endTable(outputFile, options.usewiki)
+				colspan = 0
 		else:
 			# the tag is always at the beginning of a line
 			tag = splitLine[0]
@@ -118,6 +118,7 @@ if __name__ == '__main__':
 				# so that we'll know how big to make the next freeform row
 				colspan = max(colspan, len(text))
 				writeTableRow(outputFile, text, tag[1:], options.usewiki)
+				started = True
 			elif tag in fftags:
 				# "\t" is supposed to come first, so we have to look ahead
 				# to know how big it should be
@@ -125,9 +126,9 @@ if __name__ == '__main__':
 					nextLine = fileLines[fileLines.index(line)+1]
 					colspan = len(nextLine.split()) - 1 # -1 because of tag
 					startTable(outputFile, options.usewiki)
-					isEnded = False
 				writeFreeformRow(outputFile, text, tag[1:], colspan, options.usewiki)
 				colspan = 0
+				started = True
 			else:
 				continue
 	
