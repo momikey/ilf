@@ -1,18 +1,36 @@
+/* styling for the whole table */
+table.interlinear
+{
+	border-width: 0;
+	table-padding: 0;
+	border-spacing: 5px;
+}
+
 /* freeform text */
 tr.il_t, tr.il_f
-{	font-weight: bold;
-	font-size: 116%;	}
+{	
+	font-weight: bold;
+	font-size: 100%;
+}
 
 /* phonetic transcription */
 tr.il_i
-{	font-size: 93%;	}
+{	
+	font-size: 85%;
+}
 
 tr.il_m
-{	font-weight: bold;	}
+{
+	font-weight: bold;	
+	font-size: 93%;
+}
 
 tr.il_g
-{	font-family: monospace;	}
+{
+	font-family: monospace;	
+	font-size: 93%;
+}
 
 tr.il_p
 {	font-style: italic;
-	font-size: 91%;	}
+	font-size: 85%;	}
