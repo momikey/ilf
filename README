@@ -1,4 +1,4 @@
-Interlinear Formatter v0.2
+Interlinear Formatter v0.3
 
 The Interlinear Formatter (ILF) is a Python script that takes a text
 file containing an interlinear translation and formats it with HTML or
@@ -49,15 +49,18 @@ converted to a single column which spans the entire width of the table.
 All other lines are converted to one column per word, gloss, or
 morpheme, based on whitespace.
 
-The output file will be a fragment of HTML (or MediaWiki markup, if the
-"-w" option was given) that contains a number of tables, one for each
+The output file will be an HTML page (or MediaWiki markup, if the "-w"
+option was given) that contains a number of tables, one for each
 "section" of the interlinear; sections are ended by blank lines. The
 table rows belong to classes named "il_X", where X is the letter of the
 tag. So glosses are in class "il_g", parts of speech in "il_p", etc.
 These can be used for CSS styling of the text, and a sample CSS file is
 included.
 
-The script doesn't (yet) attempt to rearrange lines, and the output is
-not a full HTML document. As of the current version, it is only the bare
-minimum of a table, that must be added to an existing page. Future
-versions will change this behavior.
+Note that the script does not attempt to rearrange lines so that they
+are always in the same order. Also, everything in the input file until
+the first line beginning with a recognized tag is ignored. This is
+because full interlinear files (like those used by Toolbox) often start
+with IDs and reference numbers. These are ignored, but the blank lines
+between them and the first interlinear line would cause extraneous
+end-of-table markup.
